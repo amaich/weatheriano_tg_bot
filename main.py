@@ -24,12 +24,16 @@ async def get_weather(message: types.Message):
     city = data['name']
     temp = data['main']['temp']
     weather = data['weather'][0]['description']
+    weather = weather[0].upper() + weather[1:]
     wind = data['wind']['speed']
-    print(data)
-    clean_data = f'{city}:' \
-                 f'Температура: {temp}\n' \
+    clean_data = f'{city}: \n' \
                  f'{weather}\n' \
-                 f'Скорость ветра: {wind}'
+                 f'Температура: {temp} C\u00b0 \n' \
+                 f'Скорость ветра: {wind} м/с'
+
+    print(data)
+    print(clean_data)
+    print()
     await message.reply(clean_data)
 
 
