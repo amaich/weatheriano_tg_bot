@@ -21,11 +21,15 @@ async def get_weather(message: types.Message):
     url = f'https://api.openweathermap.org/data/2.5/weather?q={message.text}&lang=ru&units=metric&APPID={config.weather_api_token}'
     response = requests.get(url)
     data = response.json()
+    city = data['name']
     temp = data['main']['temp']
     weather = data['weather'][0]['description']
+    wind = data['wind']['speed']
     print(data)
-    clean_data = f'Температура: {temp}\n' \
-                 f'{weather}'
+    clean_data = f'{city}:' \
+                 f'Температура: {temp}\n' \
+                 f'{weather}\n' \
+                 f'Скорость ветра: {wind}'
     await message.reply(clean_data)
 
 
