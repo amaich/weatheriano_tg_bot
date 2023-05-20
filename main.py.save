@@ -1,0 +1,20 @@
+import os
+import datetime
+import requests
+from aiogram import Bot, types
+from aiogram.dispatcher import Dispatcher
+from aiogram.utils import executor
+
+import .config
+
+
+bot = Bot(token=config.bot_token)
+dp = Dispatcher(bot)
+
+@dp.message.handler(commands=['start'])
+async def start_command(message: types.Message):
+    await message.reply("Hello!")
+
+
+if __name__ == '__main__':
+    executor.startpolling(dp)
